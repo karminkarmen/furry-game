@@ -1,4 +1,4 @@
-# NOT furry-game
+# not :) furry-game
 Simple JS game based on packman.
 You have to control square and catch circles. 
 
