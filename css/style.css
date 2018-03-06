@@ -76,7 +76,7 @@ button {
   font-size: 2rem;
 }
 
-#over {
+.overBgc {
   position: fixed;
   width: 100%;
   height: 100%;

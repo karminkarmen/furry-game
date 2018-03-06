@@ -13,21 +13,22 @@ function Game() {
         return x + (y * 10);
     };
 
-    this.showFurry = function () {
+    this.showFurry = function() {
         this.hideVisibleFurry();
-        this.board[this.index(this.furry.x, this.furry.y)].classList.add('furry');
-    };
-
-    this.hideVisibleFurry = function () {
-        this.visibleFurry = document.querySelector(".furry");
-        if(this.visibleFurry !== null) {
-            this.visibleFurry.classList.remove('furry');
-        }
+        this.board[ this.index(this.furry.x,this.furry.y) ].classList.add('furry');
     };
 
     this.showCoin = function () {
         this.board[this.index(this.coin.x, this.coin.y)].classList.add('coin');
     };
+
+    this.startGame = function () {
+        var self = this;
+        this.idSetInterval = setInterval(function () {
+            self.moveFurry();
+        }, 250);
+    };
+
 
     this.moveFurry = function () {
         if (this.furry.direction === "right") {
@@ -39,10 +40,19 @@ function Game() {
         } else if (this.furry.direction === "down") {
             this.furry.y++;
         }
-        this.showFurry();
-        this.gameOver();
-        this.checkCoinCollision();
+        if(this.gameOver() !== true) {
+            this.showFurry();
+            this.checkCoinCollision();
+        }
     };
+
+    this.hideVisibleFurry = function () {
+        this.visibleFurry = document.querySelector(".furry");
+        if(this.visibleFurry !== null) {
+            this.visibleFurry.classList.remove('furry');
+        }
+    };
+
 
     this.turnFurry = function (event) {
         switch (event.key) {
@@ -76,7 +86,7 @@ function Game() {
         if((this.furry.x < 0 || this.furry.x > 9) || (this.furry.y < 0 || this.furry.y > 9)){
             clearInterval(this.idSetInterval);
             this.hideVisibleFurry();
-            var showOver = document.getElementById("over");
+            var showOver = document.querySelector(".overBgc");
             showOver.classList.remove("invisible");
             var showScore = document.querySelector("#over span");
             showScore.innerText = this.score;
@@ -85,18 +95,13 @@ function Game() {
         return false;
     };
 
-    this.startGame = function () {
-        var self = this;
-        this.idSetInterval = setInterval(function () {
-            self.moveFurry();
-        }, 250);
-    };
-
     this.clear = function(){
         for(var i = 0; i < this.board.length; i++){
             this.board[i].className = "";
         }
-    }
+    };
+
+
 
 }
 
@@ -114,18 +119,18 @@ startButton.addEventListener("click", function(){
     theGame.startGame();
 });
 
-var playAgain = document.querySelector("#over button");
+
+var playAgain = document.querySelector(".overInfo button");
 playAgain.addEventListener("click", function() {
-    document.querySelector("#over").classList.add("invisible");
     theGame.clear();
     theGame = new Game();
     theGame.showFurry();
     theGame.showCoin();
     theGame.startGame();
+    document.querySelector(".overBgc").classList.add("invisible");
 });
 
 
 document.addEventListener('keydown', function (event) {
-    console.log(event);
     theGame.turnFurry(event);
 });
