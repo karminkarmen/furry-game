@@ -60,45 +60,11 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Game = __webpack_require__(3);
-
-var theGame = new Game();
-
-var startSection = document.querySelector(".startSection");
-var startButton = document.querySelector(".startButton");
-
-startButton.addEventListener("click", function(){
-    startSection.classList.add("invisible");
-    theGame.showFurry();
-    theGame.showCoin();
-    theGame.startGame();
-});
-
-
-var playAgain = document.querySelector(".overInfo button");
-playAgain.addEventListener("click", function() {
-    theGame.clear();
-    theGame = new Game();
-    theGame.showFurry();
-    theGame.showCoin();
-    theGame.startGame();
-    document.querySelector(".overBgc").classList.add("invisible");
-});
-
-
-document.addEventListener('keydown', function (event) {
-    theGame.turnFurry(event);
-});
-
-/***/ }),
-/* 1 */
 /***/ (function(module, exports) {
 
 //F U R R R Y CONSTRUCTOR
@@ -111,7 +77,7 @@ function Furry() {
 module.exports = Furry;
 
 /***/ }),
-/* 2 */
+/* 1 */
 /***/ (function(module, exports) {
 
 //C O I N CONSTRUCTOR
@@ -123,11 +89,11 @@ function Coin() {
 module.exports = Coin;
 
 /***/ }),
-/* 3 */
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Furry = __webpack_require__(1);
-var Coin = __webpack_require__(2);
+var Furry = __webpack_require__(0);
+var Coin = __webpack_require__(1);
 
 //G A M E CONSTRUCTOR
 function Game() {
@@ -229,7 +195,33 @@ function Game() {
     };
 }
 
-module.exports = Game;
+var theGame = new Game();
+
+var startSection = document.querySelector(".startSection");
+var startButton = document.querySelector(".startButton");
+
+startButton.addEventListener("click", function(){
+    startSection.classList.add("invisible");
+    theGame.showFurry();
+    theGame.showCoin();
+    theGame.startGame();
+});
+
+
+var playAgain = document.querySelector(".overInfo button");
+playAgain.addEventListener("click", function() {
+    theGame.clear();
+    theGame = new Game();
+    theGame.showFurry();
+    theGame.showCoin();
+    theGame.startGame();
+    document.querySelector(".overBgc").classList.add("invisible");
+});
+
+
+document.addEventListener('keydown', function (event) {
+    theGame.turnFurry(event);
+});
 
 /***/ })
 /******/ ]);
