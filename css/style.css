@@ -84,14 +84,16 @@ button {
   top: 0;
   z-index: 1;
   background-color: #ff5e62;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .overInfo {
   color: white;
   font-size: 1rem;
   font-family: 'Montserrat', sans-serif;
-  margin-top: 40vh;
-  margin-left: 30vw;
+  text-align: center;
 }
 
 .invisible {
